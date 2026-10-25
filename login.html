@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Food Waste Management System</title>
+
+    <!-- Bootstrap CSS for responsive layout -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">FoodSaver</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Theme Toggle Button -->
+                        <button id="theme-toggle" class="btn btn-outline-light ms-3 btn-sm rounded-pill px-3">🌙 Dark Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-5">
+                    <div class="card custom-card border-0 shadow-lg p-4 p-md-5 mt-4">
+                        <div class="card-body">
+                            <h2 class="text-center fw-bold mb-3 text-primary">Welcome Back</h2>
+                            <p class="text-center text-muted mb-5">Sign in to access your customized dashboard.</p>
+
+                            <!-- Alert Box for Notifications -->
+                            <div id="form-alert" class="alert d-none" role="alert"></div>
+
+                            <!-- Login Form -->
+                            <form id="login-form" novalidate>
+                                
+                                <!-- Email Address -->
+                                <div class="mb-4">
+                                    <label for="email" class="form-label fw-semibold">Email Address</label>
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="mb-4">
+                                    <label for="password" class="form-label fw-semibold">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                    <div class="invalid-feedback">Please enter your password.</div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="d-grid mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm py-3">
+                                        Sign In 🔑
+                                    </button>
+                                </div>
+
+                                <!-- Redirect to Register link -->
+                                <div class="text-center mt-4">
+                                    <p class="text-muted small mb-0">Don't have an account yet? <a href="register.html" class="text-primary fw-bold text-decoration-none">Register here</a></p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto border-top border-secondary">
+        <div class="container text-center">
+            <h5 class="fw-bold mb-3 text-primary">FoodSaver Platform</h5>
+            <p class="text-white-50 mb-0">&copy; 2026 Food Waste Management System. Built to help.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core Script for theme toggling -->
+    <script src="script.js"></script>
+
+    <!-- Module script for handling login logic -->
+    <script type="module">
+        import { loginUser, redirectUserByRole } from './auth.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const formAlert = document.getElementById('form-alert');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    // Hide alerts
+                    formAlert.classList.add('d-none');
+                    formAlert.classList.remove('alert-success', 'alert-danger');
+
+                    const email = document.getElementById('email').value.trim();
+                    const password = document.getElementById('password').value;
+
+                    // Form validation
+                    if (!loginForm.checkValidity()) {
+                        event.stopPropagation();
+                        loginForm.classList.add('was-validated');
+                        return;
+                    }
+
+                    try {
+                        // Show loading state
+                        const submitBtn = loginForm.querySelector('button[type="submit"]');
+                        const originalBtnText = submitBtn.innerHTML;
+                        submitBtn.innerHTML = 'Signing In... ⏳';
+                        submitBtn.disabled = true;
+
+                        // Perform sign-in
+                        const { user, role } = await loginUser(email, password);
+
+                        // Success notification
+                        formAlert.innerHTML = `<strong>Success!</strong> Welcome back! Redirecting to dashboard...`;
+                        formAlert.classList.remove('d-none');
+                        formAlert.classList.add('alert-success');
+
+                        // Reset form styling
+                        loginForm.classList.remove('was-validated');
+
+                        // Redirect to the correct page
+                        setTimeout(() => {
+                            redirectUserByRole(role);
+                        }, 1200);
+
+                    } catch (error) {
+                        console.error("Login failed:", error);
+                        
+                        // Parse simple beginner-friendly messages
+                        let errorMsg = "Verify your email and password and try again.";
+                        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                            errorMsg = "Incorrect email address or password.";
+                        } else if (error.code === 'auth/invalid-email') {
+                            errorMsg = "Please enter a valid email address.";
+                        } else if (error.code === 'auth/too-many-requests') {
+                            errorMsg = "Access to this account has been temporarily disabled due to many failed login attempts. You can try again later.";
+                        }
+
+                        formAlert.innerHTML = `<strong>Login Failed!</strong> ${errorMsg}`;
+                        formAlert.classList.remove('d-none');
+                        formAlert.classList.add('alert-danger');
+
+                        // Restore submit button
+                        const submitBtn = loginForm.querySelector('button[type="submit"]');
+                        submitBtn.innerHTML = 'Sign In 🔑';
+                        submitBtn.disabled = false;
+                    }
+
+                    // Scroll to alert box
+                    formAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

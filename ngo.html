@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard - Food Waste Management System</title>
+
+    <!-- Bootstrap CSS for responsive layout -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">FoodSaver</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="donate.html">Donate Food</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="ngo.html">NGO Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="volunteer.html">Volunteer Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="btn btn-outline-light ms-3 btn-sm rounded-pill px-3">🌙 Dark
+                            Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NGO Dashboard Header -->
+    <section class="py-5 mt-5 bg-light">
+        <div class="container text-center pt-4 pb-2">
+            <h2 class="fw-bold text-primary">NGO Dashboard</h2>
+            <p class="text-muted fs-5 mb-0">Browse available food donations and request them for distribution.</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Counts Section -->
+    <section class="pt-3">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <!-- Total Donations -->
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm custom-card bg-primary text-white h-100">
+                        <div class="card-body py-3">
+                            <h3 class="fw-bold mb-1" id="count-total">0</h3>
+                            <p class="mb-0 small fw-semibold opacity-75">Total Donations</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Available Donations -->
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm custom-card text-white h-100"
+                        style="background-color: #10b981;">
+                        <div class="card-body py-3">
+                            <h3 class="fw-bold mb-1" id="count-available">0</h3>
+                            <p class="mb-0 small fw-semibold opacity-75">Available Food</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delivered Donations -->
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm custom-card text-white h-100"
+                        style="background-color: #3b82f6;">
+                        <div class="card-body py-3">
+                            <h3 class="fw-bold mb-1" id="count-delivered">0</h3>
+                            <p class="mb-0 small fw-semibold opacity-75">Delivered Food</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Active Volunteers -->
+                <div class="col-6 col-md-3">
+                    <div class="card border-0 shadow-sm custom-card text-white h-100"
+                        style="background-color: #8b5cf6;">
+                        <div class="card-body py-3">
+                            <h3 class="fw-bold mb-1" id="count-volunteers">0</h3>
+                            <p class="mb-0 small fw-semibold opacity-75">Active Volunteers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter and Search Section -->
+    <section class="pt-5 pb-3">
+        <div class="container">
+            <div class="card border-0 shadow-sm custom-card p-4">
+                <h5 class="fw-bold mb-3 text-primary">🔍 Search & Filter</h5>
+                <div class="row g-3">
+                    <!-- Search by Food Name -->
+                    <div class="col-md-3">
+                        <label class="form-label small fw-semibold text-muted mb-1">Food Name</label>
+                        <input type="text" id="filter-name" class="form-control" placeholder="Search name...">
+                    </div>
+                    <!-- Filter by Category -->
+                    <div class="col-md-3">
+                        <label class="form-label small fw-semibold text-muted mb-1">Category</label>
+                        <select id="filter-category" class="form-select">
+                            <option value="">All Categories</option>
+                            <option value="Cooked Food">Cooked Food</option>
+                            <option value="Raw Vegetables">Raw Vegetables</option>
+                            <option value="Packaged Items">Packaged Items</option>
+                            <option value="Bakery">Bakery</option>
+                        </select>
+                    </div>
+                    <!-- Filter by Location -->
+                    <div class="col-md-3">
+                        <label class="form-label small fw-semibold text-muted mb-1">Location</label>
+                        <input type="text" id="filter-location" class="form-control"
+                            placeholder="Search city or area...">
+                    </div>
+                    <!-- Filter by Status -->
+                    <div class="col-md-3">
+                        <label class="form-label small fw-semibold text-muted mb-1">Status</label>
+                        <select id="filter-status" class="form-select">
+                            <option value="">All Statuses</option>
+                            <option value="Available">Available</option>
+                            <option value="Requested">Requested</option>
+                            <option value="Picked Up">Picked Up</option>
+                            <option value="Delivered">Delivered</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donations Feed Section -->
+    <section class="py-4 min-vh-100">
+        <div class="container">
+            <!-- Loading Indicator -->
+            <div id="loading-spinner" class="text-center py-5">
+                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"></div>
+                <p class="mt-3 text-muted fw-semibold">Fetching available donations from Firebase...</p>
+            </div>
+
+            <!-- This container will be dynamically populated with cards by ngo.js -->
+            <div class="row g-4" id="donations-container">
+                <!-- Cards will be injected here -->
+            </div>
+
+            <!-- Message if no donations match the filters -->
+            <div id="no-donations-msg" class="text-center d-none py-5">
+                <div class="display-1 text-muted mb-3">🍲</div>
+                <h4 class="text-muted fw-bold">No food donations found.</h4>
+                <p class="text-muted">Try adjusting your search filters or check back later!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto border-top border-secondary">
+        <div class="container text-center">
+            <h5 class="fw-bold mb-3 text-primary">FoodSaver Platform</h5>
+            <p class="text-white-50 mb-0">&copy; 2026 Food Waste Management System. Built to help.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Specific NGO Dashboard JS -->
+    <script type="module" src="ngo.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Management System</title>
+
+    <!-- Bootstrap CSS for responsive layout and pre-built components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts for modern and clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Link to our custom CSS file for additional styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">FoodSaver</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donor.html">Donate Food</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ngo.html">NGO Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="volunteer.html">Volunteer Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Dark Mode Toggle Button handled by script.js -->
+                        <button id="theme-toggle" class="btn btn-outline-light ms-3 btn-sm rounded-pill px-3">🌙 Dark
+                            Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero d-flex align-items-center text-center text-md-start">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-5 mb-md-0">
+                    <h1 class="display-4 fw-bold text-dark mb-3 hero-title fade-in-up">Share Food, <br><span
+                            class="text-primary">Share Love.</span></h1>
+                    <p class="lead text-muted mb-4 pe-md-4 fade-in-up" style="animation-delay: 0.1s;">Join our mission to reduce food waste and help those in
+                        need. Easily donate excess food or request food for your NGO.</p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-md-start flex-wrap fade-in-up" style="animation-delay: 0.2s;">
+                        <a href="donor.html"
+                            class="btn btn-primary btn-lg px-4 py-2 fw-semibold shadow-sm">Donate Food</a>
+                        <a href="ngo.html"
+                            class="btn btn-outline-primary btn-lg px-4 py-2 fw-semibold shadow-sm bg-white">NGO
+                            Dashboard</a>
+                        <a href="volunteer.html"
+                            class="btn btn-outline-success btn-lg px-4 py-2 fw-semibold shadow-sm bg-white">Volunteer</a>
+                    </div>
+                </div>
+                <div class="col-md-6 fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Food Donation" class="img-fluid rounded-4 shadow-lg hero-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light border-top border-bottom">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold section-title mb-3">How It Works</h2>
+                <p class="text-muted fs-5">A simple process to make a big difference in our community.</p>
+            </div>
+
+            <!-- Interactive Role Selector Tabs -->
+            <div class="d-flex justify-content-center mb-4">
+                <div class="custom-tabs-nav">
+                    <button class="tab-pill active" id="tab-donor" onclick="switchHomeTab('donor')">🍲 For Donors</button>
+                    <button class="tab-pill" id="tab-ngo" onclick="switchHomeTab('ngo')">🏢 For NGOs</button>
+                    <button class="tab-pill" id="tab-volunteer" onclick="switchHomeTab('volunteer')">🚴 For Volunteers</button>
+                </div>
+            </div>
+
+            <!-- Tab Content Pane: Donors -->
+            <div class="tab-content-pane active" id="pane-donor">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-primary-subtle text-primary mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">1</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Register</h4>
+                                <p class="card-text text-muted">Sign up as a Donor to list excess, high-quality surplus food from your kitchen or store.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-success-subtle text-success mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">2</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">List Food</h4>
+                                <p class="card-text text-muted">Easily post surplus food items detailing servings, categories, location, and photos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-info-subtle text-info mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">3</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Rescue</h4>
+                                <p class="card-text text-muted">Volunteers and local NGOs coordinate pickup and take the food to those in need.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content Pane: NGOs -->
+            <div class="tab-content-pane" id="pane-ngo">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-primary-subtle text-primary mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">1</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Register</h4>
+                                <p class="card-text text-muted">Create an account as a verified NGO to search and request surplus food donations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-success-subtle text-success mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">2</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Request</h4>
+                                <p class="card-text text-muted">Claim food listings. Volunteers are auto-assigned to transport items directly to you.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-info-subtle text-info mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">3</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Confirm Receipt</h4>
+                                <p class="card-text text-muted">Confirm delivery receipt on your dashboard once volunteers deliver the food.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content Pane: Volunteers -->
+            <div class="tab-content-pane" id="pane-volunteer">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-primary-subtle text-primary mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">1</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Register</h4>
+                                <p class="card-text text-muted">Sign up as a Volunteer driver/courier to access active pending rescue tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-success-subtle text-success mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">2</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Claim Deliveries</h4>
+                                <p class="card-text text-muted">Accept tasks, route using mapping coordinates, and pick up food packages from Donors.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm custom-card text-center p-4">
+                            <div class="card-body">
+                                <div class="icon-wrapper bg-info-subtle text-info mb-4 mx-auto shadow-sm">
+                                    <span class="fs-2 fw-bold">3</span>
+                                </div>
+                                <h4 class="card-title fw-bold mb-3">Complete Rescues</h4>
+                                <p class="card-text text-muted">Mark tasks as transit and delivered on delivery completion to finalize the rescue.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto border-top border-secondary">
+        <div class="container text-center">
+            <h5 class="fw-bold mb-3 text-primary">FoodSaver Platform</h5>
+            <p class="text-white-50 mb-0">&copy; 2026 Food Waste Management System. Built to help.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function switchHomeTab(role) {
+            // Remove active classes
+            document.querySelectorAll('#about .tab-pill').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('#about .tab-content-pane').forEach(el => el.classList.remove('active'));
+            
+            // Add active classes
+            document.getElementById('tab-' + role).classList.add('active');
+            document.getElementById('pane-' + role).classList.add('active');
+        }
+    </script>
+    <script type="module">
+        import { monitorSessionForNavbar } from './auth.js';
+        monitorSessionForNavbar();
+    </script>
+</body>
+
+</html>
